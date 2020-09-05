@@ -43,14 +43,21 @@ app.post('/postOrder', function (req, res)
 app.post('/getOrderStatus', function (req, res)
 {
     console.log(req.body);
-    pedidos.forEach(item =>
+    if (pedidos.length == 0)
+    {
+        res.json({ msg: "No hay ordenes registradas." });
+    }
+    pedidos.forEach((item, index) =>
     {
         if (item.code == req.body.code)
         {
             res.json({ status: item.status });
         }
+        else if (index == pedidos.length - 1)
+        {
+            res.json({ msg: "No se ha encontrado la orden." });
+        }
     });
-    res.json({ msg: "No se ha encontrado la orden." });
 });
 
 

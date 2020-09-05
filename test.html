@@ -42,15 +42,27 @@
         </button>
     </div>
 
+    <div>
+        <h1>
+            Totales
+        </h1>
+        <button onclick="getAllPostedRestaurant()">
+            OBTENER TODOS LOS PEDIDOS RESTAURANTE
+        </button>
+        <button onclick="getAllPostedDelivery()">
+            OBTENER TODOS LOS PEDIDOS DELIVERY
+        </button>
+    </div>
+
+
     <script>
-        var index = 0;
 
         const postClientRestaurant = () =>
         {
             fetch('http://localhost:3000/postOrder',
                 {
                     method: 'POST',
-                    body: JSON.stringify({ code: index++, status: 'pending' }),
+                    body: JSON.stringify({ code: 0, status: 'pending' }),
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -65,13 +77,13 @@
 
         const getOrderStatusClientRestaurant = () =>
         {
-            fetch('http://localhost:3001/getOrderStatus',
+            fetch('http://localhost:3003/getOrderStatusRestaurant',
                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ code: index })
+                    body: JSON.stringify({ code: 0 })
                 }).then(res =>
                 {
                     res.json().then(value =>
@@ -83,13 +95,13 @@
 
         const getDeliveryStatusClientDelivery = () =>
         {
-            fetch('http://localhost:3002/getOrderStatus',
+            fetch('http://localhost:3003/getOrderStatusDelivery',
                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ code: index })
+                    body: JSON.stringify({ code: 0 })
                 }).then(res =>
                 {
                     res.json().then(value =>
@@ -121,7 +133,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ code: index })
+                    body: JSON.stringify({ code: 0 })
                 }).then(res =>
                 {
                     res.json().then(value =>
@@ -130,6 +142,30 @@
                     })
                 });
         }
+
+
+        const getAllPostedRestaurant = () =>
+        {
+            fetch('http://localhost:3003/getPostedRestaurant').then(res =>
+            {
+                res.json().then(value =>
+                {
+                    console.log(value);
+                })
+            });
+        }
+
+        const getAllPostedDelivery = () =>
+        {
+            fetch('http://localhost:3003/getPostedDelivery').then(res =>
+            {
+                res.json().then(value =>
+                {
+                    console.log(value);
+                })
+            });
+        }
+
     </script>
 </body>
 

@@ -33,7 +33,7 @@ app.post('/postOrder', function (req, res)
     console.log(req.body);
     request({
         method: 'POST',
-        uri: `http://localhost:3001/postOrder`,
+        uri: `http://localhost:3003/postOrderRestaurant`,
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(req.body)
     }, function (error, response, body)
@@ -41,56 +41,6 @@ app.post('/postOrder', function (req, res)
         if (response.statusCode == 200)
         {
             console.log('Orden enviada a restaurante.');
-        }
-        else
-        {
-            console.log('Error: ' + response.statusCode);
-            console.log(body);
-        }
-    }).pipe(res);
-});
-
-
-//OBTENER ESTADO DE LA ORDEN RESTAURANTE
-app.get('/getOrderStatus', function (req, res)
-{
-    console.log(req.body);
-    request({
-        method: 'POST',
-        uri: `http://localhost:3001/getOrderStatus`,
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ code: req.body.code })
-    }, function (error, response, body)
-    {
-        if (response.statusCode == 200)
-        {
-            console.log('Estado de la orden:');
-            console.log(body);
-        }
-        else
-        {
-            console.log('Error: ' + response.statusCode);
-            console.log(body);
-        }
-    }).pipe(res);
-});
-
-
-//OBTENER ESTADO DEL PEDIDO REPARTIDOR
-app.get('/getDeliveryStatus', function (req, res)
-{
-    console.log(req.body);
-    request({
-        method: 'POST',
-        uri: `http://localhost:3002/getOrderStatus`,
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ code: req.body.code })
-    }, function (error, response, body)
-    {
-        if (response.statusCode == 200)
-        {
-            console.log('Estado del delivery:');
-            console.log(body);
         }
         else
         {
